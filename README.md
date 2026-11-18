@@ -2,6 +2,10 @@
 
 Prueba de concepto del Sistema de Denuncias Públicas (S5) para el Datatón Anticorrupción 2026. La persona denunciante llena el formulario y pulsa **Enviar denuncia**. El navegador cifra el relato y la evidencia, los envía a la pestaña de autoridad y muestra un folio y un código de seguimiento después de recibir confirmación. Con ambos consulta el estado sin dar nombre ni correo. Todo el recorrido usa datos ficticios.
 
+![Recorrido de la demostración](PARMEX_demo.gif)
+
+Veinte segundos del recorrido completo: captura, cifrado, comprobante con folio y código, autoridad y consulta de estado.
+
 ## Propuesta para el S5
 
 Incorporar el cifrado del relato y la evidencia al botón de envío del S5. Para la persona denunciante, la interacción sería llenar un formulario guiado, recibir un comprobante con folio y código de seguimiento, y consultar el estado cuando quiera. Para la autoridad, sería abrir el expediente desde su bandeja y actualizar su estado. La clave, el código y el formato de intercambio se gestionan detrás de esas acciones.
