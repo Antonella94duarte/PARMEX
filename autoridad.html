@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Denuncias recibidas | PARMEX</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body data-role="authority">
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="index.html">PARMEX</a>
+      <nav aria-label="Vistas de la demo">
+        <a href="index.html">Captura ciudadana</a>
+        <a href="consulta.html">Consultar estado</a>
+        <a href="autoridad.html" aria-current="page">Autoridad receptora</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <header class="intro">
+      <p class="demo">Demostración con datos ficticios</p>
+      <h1>Denuncias recibidas</h1>
+      <p>Puedes cerrar o recargar esta pestaña: los expedientes quedan guardados cifrados en este navegador y la llave se conserva para abrirlos.</p>
+    </header>
+    <div class="flow">
+      <section class="card primary" aria-labelledby="open-title">
+        <h2 id="open-title">Bandeja de la demo</h2>
+        <p id="recipient-status" role="status">Preparando la recepción…</p>
+        <p id="recipient-error" role="alert"></p>
+        <button id="generate" type="button" hidden>Volver a preparar la recepción</button>
+        <div id="inbox" hidden>
+          <label for="reports">Elige una denuncia por folio</label>
+          <select id="reports"></select>
+        </div>
+        <div id="demo-actions" class="step-actions" hidden>
+          <button id="seed-demo" type="button" class="secondary" hidden>Cargar expedientes de ejemplo</button>
+          <button id="clear-demo" type="button" class="secondary" hidden>Vaciar la bandeja</button>
+        </div>
+        <details class="technical">
+          <summary>Prueba técnica con archivos</summary>
+          <p>La clave privada es no exportable y se guarda en este navegador para sobrevivir a una recarga.</p>
+          <div id="recipient-result" class="result" hidden>
+            <strong>Huella SHA-256</strong>
+            <p id="recipient-fingerprint" class="mono"></p>
+            <button id="download-public" type="button" class="secondary">Descargar clave pública</button>
+          </div>
+          <form id="review" autocomplete="off">
+          <fieldset id="review-fields" disabled>
+            <label for="package-file">Archivo del expediente (JSON)</label>
+            <input id="package-file" type="file" accept=".json,application/json" required aria-describedby="package-help">
+            <p id="package-help" class="hint">Tamaño máximo del paquete cifrado: 2 MiB.</p>
+            <button type="submit">Descifrar expediente</button>
+          </fieldset>
+        </form>
+        </details>
+        <p id="review-status" role="status"></p>
+        <p id="review-error" role="alert"></p>
+        <section id="opened" class="result" hidden aria-labelledby="opened-title">
+          <h3 id="opened-title">Expediente recuperado</h3>
+          <p>Folio <output id="opened-folio" class="mono"></output></p>
+          <p>Estado <strong id="opened-state">Recibida</strong></p>
+          <button id="mark-review" type="button" class="secondary">Marcar en revisión</button>
+          <dl id="opened-answers"></dl>
+          <h4>Relato</h4>
+          <p id="opened-story" class="story"></p>
+          <h4>Evidencia adjunta</h4>
+          <p id="opened-name"></p>
+          <button id="download-evidence" type="button" class="secondary">Descargar adjunto recuperado</button>
+        </section>
+      </section>
+      <section class="card dashboard" aria-labelledby="dashboard-title">
+        <h2 id="dashboard-title">Tablero de focos rojos</h2>
+        <p>Resumen de las denuncias ficticias recibidas en esta pestaña. Los casos que siguen ocurriendo se cuentan según lo que indicó la persona denunciante.</p>
+        <div class="stats">
+          <div><strong id="total-reports">0</strong><span>Denuncias recibidas</span></div>
+          <div><strong id="ongoing-reports">0</strong><span>Siguen ocurriendo</span></div>
+        </div>
+        <h3>Casos por ámbito</h3>
+        <div id="scope-breakdown" class="scope-breakdown"></div>
+        <p class="hint">Estos conteos describen la bandeja de prueba. Para estimar riesgos o publicar estadísticas se requiere una metodología validada.</p>
+      </section>
+    </div>
+    <p id="fatal" role="alert"></p>
+  </main>
+  <footer>PARMEX · Prototipo para el Sistema de Denuncias Públicas (S5)</footer>
+</body>
+</html>

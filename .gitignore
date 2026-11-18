@@ -1,0 +1,11 @@
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Copias de respaldo y paquetes comprimidos
+respaldo/
+*.zip
+
+# Temporales de trabajo
+_*

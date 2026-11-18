@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Consulta de estado | PARMEX</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="consulta.mjs"></script>
+</head>
+<body data-role="consulta">
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="index.html">PARMEX</a>
+      <nav aria-label="Vistas de la demo">
+        <a href="index.html">Captura ciudadana</a>
+        <a href="consulta.html" aria-current="page">Consultar estado</a>
+        <a href="autoridad.html" target="_blank" rel="noopener">Vista de la autoridad (otra pestaña)</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <header class="intro">
+      <p class="demo">Demostración con datos ficticios</p>
+      <h1>Consulta el estado</h1>
+      <p>Ingresa el folio y el código de seguimiento que recibiste al enviar la denuncia. No pedimos nombre ni correo.</p>
+    </header>
+    <div class="flow single">
+      <section class="card primary" aria-labelledby="query-title">
+        <h2 id="query-title">Datos de seguimiento</h2>
+        <form id="query" autocomplete="off" novalidate>
+          <label for="folio">Folio</label>
+          <input id="folio" name="folio" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" maxlength="40" aria-describedby="folio-help">
+          <p id="folio-help" class="hint">32 caracteres hexadecimales. Está en tu comprobante.</p>
+          <label for="codigo">Código de seguimiento</label>
+          <input id="codigo" name="codigo" type="text" spellcheck="false" autocomplete="off" autocapitalize="characters" maxlength="14" aria-describedby="codigo-help">
+          <p id="codigo-help" class="hint">10 caracteres. Puedes escribirlo con o sin el guion.</p>
+          <div class="step-actions">
+            <button id="consult" type="submit">Consultar estado</button>
+          </div>
+        </form>
+        <p id="query-status" role="status"></p>
+        <p id="query-error" role="alert"></p>
+        <section id="answer" class="result" hidden aria-labelledby="answer-title">
+          <h3 id="answer-title" tabindex="-1">Estado de la denuncia</h3>
+          <p>Folio <output id="answer-folio" class="mono"></output></p>
+          <p>Estado <strong id="answer-state"></strong></p>
+          <p class="hint">Este estado lo actualiza la autoridad receptora. No muestra el contenido del expediente.</p>
+        </section>
+        <p class="hint">La consulta funciona mientras la pestaña de la autoridad esté abierta en este navegador y perfil.</p>
+      </section>
+    </div>
+    <p id="fatal" role="alert"></p>
+  </main>
+  <footer>PARMEX · Prototipo para el Sistema de Denuncias Públicas (S5)</footer>
+</body>
+</html>

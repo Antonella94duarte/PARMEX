@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Presenta una denuncia | PARMEX</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body data-role="citizen">
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="index.html">PARMEX</a>
+      <nav aria-label="Vistas de la demo">
+        <a href="index.html" aria-current="page">Captura ciudadana</a>
+        <a href="consulta.html">Consultar estado</a>
+        <a href="autoridad.html" target="_blank" rel="noopener">Vista de la autoridad (otra pestaña)</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <header class="intro">
+      <p class="demo">Demostración con datos ficticios</p>
+      <h1>Presenta una denuncia</h1>
+      <p>Cuéntanos qué pasó. Tu relato y el archivo se protegen automáticamente al enviarlos.</p>
+    </header>
+    <div class="flow">
+      <section class="card primary" aria-labelledby="capture-title">
+        <h2 id="capture-title">Describe el caso</h2>
+        <p id="capture-intro">Describe los hechos con tus palabras. Puedes elegir «No estoy seguro» en las preguntas de orientación.</p>
+        <form id="capture" autocomplete="off" novalidate>
+          <fieldset id="capture-fields" disabled>
+            <button type="button" id="example" class="secondary">Usar un ejemplo ficticio</button>
+            <p id="step-count" class="step-count"></p>
+            <progress id="step-progress" max="4" value="1" aria-label="Progreso de la denuncia"></progress>
+            <div id="questions"></div>
+            <div id="details-step" hidden>
+            <h3 id="details-title" tabindex="-1">Cuéntanos qué pasó</h3>
+            <label for="story">Relato</label>
+            <textarea id="story" required maxlength="12000" rows="5"></textarea>
+            <label for="attachment">Archivo de evidencia</label>
+            <p id="attachment-help" class="hint">Para esta prueba, selecciona un archivo ficticio de hasta 1 MiB o usa el ejemplo.</p>
+            <input id="attachment" type="file" aria-describedby="attachment-help file-choice attachment-note">
+            <p id="file-choice" class="hint" aria-live="polite"></p>
+            <p id="attachment-note" class="hint" role="status"></p>
+            <div class="notice">
+              <strong>Aviso de privacidad</strong>
+              <p>Esta demostración no envía datos a internet. Lo que escribes se cifra en tu navegador y solo la pestaña de la autoridad abierta en este equipo puede leerlo.</p>
+              <p>No escribas datos personales reales de nadie: usa un caso ficticio.</p>
+            </div>
+            <label class="consent">
+              <input id="consent" type="checkbox">
+              <span>Entiendo que es una demostración y que debo usar datos ficticios.</span>
+            </label>
+            </div>
+            <div class="step-actions">
+              <button id="back" class="secondary" type="button" hidden>Regresar</button>
+              <button id="next" type="button">Continuar</button>
+              <button id="seal" type="submit" hidden>Enviar denuncia</button>
+            </div>
+          </fieldset>
+        </form>
+        <p id="capture-status" role="status"></p>
+        <p id="capture-error" role="alert"></p>
+        <a id="open-authority" href="autoridad.html" target="_blank" rel="noopener" hidden>Abrir la vista de autoridad (otra pestaña)</a>
+        <section id="receipt" class="result" hidden aria-labelledby="receipt-title">
+          <h3 id="receipt-title" tabindex="-1" aria-describedby="receipt-number receipt-message">Denuncia de prueba recibida</h3>
+          <p id="receipt-number">Folio <output id="receipt-folio" class="mono"></output></p>
+          <p>Código de seguimiento <output id="receipt-code" class="mono strong"></output></p>
+          <p id="receipt-message">Guarda el folio y el código: sin ellos no se puede consultar el estado.</p>
+          <p id="receipt-metadata" class="hint"></p>
+          <p class="hint">Cifrado para la llave <output id="receipt-key" class="mono"></output></p>
+          <button id="copy-receipt" type="button" class="secondary">Copiar folio y código</button>
+          <button id="new-report" type="button" class="secondary">Enviar otra denuncia</button>
+          <p id="copy-status" role="status"></p>
+          <p class="hint">El código se muestra una sola vez. <a href="consulta.html">Consultar el estado de una denuncia</a>.</p>
+        </section>
+      </section>
+      <div class="aside">
+        <section class="aside-card" aria-labelledby="how-title">
+          <h2 id="how-title">¿Qué pasa cuando envías?</h2>
+          <ol>
+            <li>Tu relato y tu archivo se cifran aquí, antes de salir del navegador.</li>
+            <li>La autoridad recibe el expediente y confirma que pudo abrirlo.</li>
+            <li>Recibes un folio y un código para consultar el estado.</li>
+          </ol>
+          <p class="hint">Ni el folio ni el código se pueden recuperar si los pierdes.</p>
+        </section>
+        <details class="technical">
+          <summary>Prueba técnica con archivos</summary>
+          <p>Opción para comprobar el cifrado mediante intercambio manual.</p>
+          <label for="public-file">Archivo de clave pública (JSON)</label>
+          <input id="public-file" type="file" accept=".json,application/json" disabled>
+          <p id="key-status" role="status"></p>
+          <p id="key-error" role="alert"></p>
+          <div id="key-result" class="result" hidden>
+            <strong>Huella SHA-256</strong>
+            <p id="public-fingerprint" class="mono"></p>
+          </div>
+          <button id="manual-seal" type="submit" form="capture" class="secondary" disabled>Descargar expediente cifrado</button>
+        </details>
+      </div>
+    </div>
+    <p id="fatal" role="alert"></p>
+  </main>
+  <footer>PARMEX · Prototipo para el Sistema de Denuncias Públicas (S5)</footer>
+</body>
+</html>
